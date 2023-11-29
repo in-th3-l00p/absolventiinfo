@@ -22,7 +22,7 @@
                             id="email"
                             name="email"
                             class="form-control form-control-lg"
-                            placeholder="Enter a valid email address"
+                            placeholder="Introdu adresa de email"
                         />
                         <label class="form-label" for="email">Adresa de email</label>
                     </div>
@@ -34,7 +34,7 @@
                             id="password"
                             name="password"
                             class="form-control form-control-lg"
-                            placeholder="Enter password"
+                            placeholder="Introdu parola"
                         />
                         <label class="form-label" for="password">Parola</label>
                     </div>
@@ -62,7 +62,6 @@
                             Login
                         </button>
                     </div>
-
                 </form>
             </div>
         </div>
