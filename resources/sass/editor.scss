@@ -1,0 +1,14 @@
+.ck-editor {
+    height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+
+    .ck-editor__main {
+        flex-grow: 1;
+        overflow-y: scroll;
+
+        .ck-content {
+            height: 100%;
+        }
+    }
+}
