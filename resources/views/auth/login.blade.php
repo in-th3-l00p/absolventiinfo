@@ -24,7 +24,7 @@
                             class="form-control form-control-lg"
                             placeholder="Enter a valid email address"
                         />
-                        <label class="form-label" for="email">Email address</label>
+                        <label class="form-label" for="email">Adresa de email</label>
                     </div>
 
                     <!-- Password input -->
@@ -36,10 +36,10 @@
                             class="form-control form-control-lg"
                             placeholder="Enter password"
                         />
-                        <label class="form-label" for="password">Password</label>
+                        <label class="form-label" for="password">Parola</label>
                     </div>
 
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column gap-3 justify-content-between align-items-start">
                         <!-- Checkbox -->
                         <div class="form-check mb-0">
                             <input
@@ -48,28 +48,19 @@
                                 id="remember-me"
                                 name="remember-me"
                             />
-                            <label class="form-check-label" for="remember-me">
-                                Remember me
-                            </label>
+                            <label class="form-check-label" for="remember-me">Tine-ma minte</label>
                         </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
+                        <a href="#" class="text-body">Ai uitat parola? (todo)</a>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button
                             type="submit"
-                            class="btn btn-primary btn-lg"
+                            class="btn btn-dark btn-primary btn-lg"
                             style="padding-left: 2.5rem; padding-right: 2.5rem;"
                         >
                             Login
                         </button>
-
-                        <p
-                            class="small fw-bold mt-2 pt-1 mb-0"
-                        >
-                            Don't have an account?
-                            <a href="{{ route("register") }}" class="link-danger">Register</a>
-                        </p>
                     </div>
 
                 </form>

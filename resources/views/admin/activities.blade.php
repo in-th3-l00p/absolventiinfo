@@ -1,4 +1,4 @@
-@extends("layouts.main")
+@extends("layouts.admin")
 
 @section("content")
     <section class="flex-grow-1 d-flex h-100">

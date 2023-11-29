@@ -16,18 +16,8 @@
     class="min-vh-100 w-100 d-flex flex-column"
     style="background-color: #eaeaea"
 >
-    <div class="min-vh-100">
-        <x-header />
-        @yield("content")
-    </div>
-
-    <footer class="bg-dark text-white text-center">
-        <div class="text-center p-3">
-            © 2023 Copyright:
-            <a class="text-white" href="https://www.intheloop.bio">Tisca Catalin</a>
-        </div>
-    </footer>
-
+    <x-header />
+    @yield("content")
     @stack("scripts")
 </body>
 </html>

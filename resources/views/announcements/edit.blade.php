@@ -1,4 +1,4 @@
-@extends("layouts.main")
+@extends("layouts.admin")
 
 @push("styles")
     @vite([ "resources/sass/editor.scss" ])
