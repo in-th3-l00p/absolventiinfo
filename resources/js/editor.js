@@ -17,7 +17,7 @@ function getCookie(cname) {
 }
 
 const element = document.querySelector( '#editor' );
-const editor = await ClassicEditor.create(element, {
+ClassicEditor.create(element, {
     // plugins: [ SimpleUploadAdapter ],
     simpleUpload: {
         uploadUrl: `/announcements/${id}/upload`,
@@ -26,24 +26,26 @@ const editor = await ClassicEditor.create(element, {
             "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") // have no idea why i need to send it :(
         }
     }
-});
-editor.setData(content || "");
-window.editor = editor;
+})
+    .then(editor => {
+        editor.setData(content || "");
+        window.editor = editor;
 
-const save = async () => {
-    await axios.put(updateRoute, {
-        content: editor.getData()
-    }, {
-        withCredentials: true
+        const save = async () => {
+            await axios.put(updateRoute, {
+                content: editor.getData()
+            }, {
+                withCredentials: true
+            });
+        }
+
+        // saves each 5 sec
+        setInterval(save, 5000);
+        window.onbeforeunload = save;
+
+        document.querySelector("#visibility").onchange = () => {
+            document
+                .querySelector("#main-form")
+                .submit();
+        }
     });
-}
-
-// saves each 5 sec
-setInterval(save, 5000);
-window.onbeforeunload = save;
-
-document.querySelector("#visibility").onchange = () => {
-    document
-        .querySelector("#main-form")
-        .submit();
-}
