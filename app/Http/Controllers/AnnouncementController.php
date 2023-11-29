@@ -20,7 +20,7 @@ class AnnouncementController extends Controller
             "announcements" => Announcement::query()
                 ->where("visibility", "=", "public")
                 ->latest()
-                ->paginate()
+                ->paginate(5)
         ]);
     }
 
@@ -42,15 +42,14 @@ class AnnouncementController extends Controller
         ]);
     }
 
-    public function attachFile(Request $request, Announcement $announcement) {
+    public function upload(Request $request, Announcement $announcement) {
         $path = Storage::disk("public")->put(
             "/announcements/" . $announcement->id,
-            $request->file()
+            $request->file("upload")
         );
 
-        var_dump($path);
         return [
-            "url" => $path
+            "url" => "/storage/" . $path
         ];
     }
 

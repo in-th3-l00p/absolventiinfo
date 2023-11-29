@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Http\Controllers\AnnouncementController;
+use App\Models\Announcement;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +25,8 @@ class DatabaseSeeder extends Seeder
             "email" => "admin@example.com",
             "role" => "admin"
          ]);
+
+        Announcement::factory(12)->create();
+        Announcement::factory()->private()->create();
     }
 }

@@ -9,6 +9,7 @@
     <script>
         var content = `{!! $announcement->content !!}`;
         var updateRoute = `{{ route("api.announcements.update", [ "announcement" => $announcement ]) }}`;
+        var id = `{{ $announcement->id }}`;
     </script>
     @vite(["resources/js/editor.js"])
 @endpush

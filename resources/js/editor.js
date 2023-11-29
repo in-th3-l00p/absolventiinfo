@@ -1,11 +1,30 @@
 import axios from "axios";
 
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 const element = document.querySelector( '#editor' );
 const editor = await ClassicEditor.create(element, {
     // plugins: [ SimpleUploadAdapter ],
     simpleUpload: {
-        uploadUrl: "/announcements/1/upload",
-        withCredentials: true
+        uploadUrl: `/announcements/${id}/upload`,
+        withCredentials: true,
+        headers: {
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") // have no idea why i need to send it :(
+        }
     }
 });
 editor.setData(content || "");

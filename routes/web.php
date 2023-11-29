@@ -15,8 +15,8 @@ Route::view("/register", "auth.register")->name("register");
 
 Route::resource("announcements", AnnouncementController::class);
 Route::post(
-    "/announcements/upload",
-    [AnnouncementController::class, "attachFile"]
+    "/announcements/{announcement}/upload",
+    [AnnouncementController::class, "upload"]
 )->name("announcements.upload");
 
 Route::prefix("admin")->middleware("admin")->group(function () {

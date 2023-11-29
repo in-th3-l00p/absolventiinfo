@@ -1,5 +1,10 @@
 @extends("layouts.main")
 
+@push("styles")
+    @vite(["resources/sass/post.scss"])
+    <link rel="stylesheet" href="/ckeditor/content-styles.css">
+@endpush
+
 @section("content")
     <section class="container bg-white rounded-3 my-5 p-5">
         <div class="mb-3 pb-3 border-bottom">
@@ -8,6 +13,6 @@
             <p class="text-secondary">Scris de: {{ $user->name }}</p>
         </div>
 
-        <div>{!! $announcement->content !!}</div>
+        <div class="ck-content content">{!! $announcement->content !!}</div>
     </section>
 @endsection
