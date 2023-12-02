@@ -39,7 +39,38 @@
                             </li>
                         @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route("logout") }}">Logout</a>
+                            <div class="dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    type="button"
+                                    id="profile-dropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    {{ Request::user()->first_name . " " . Request::user()->last_name }}
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="profile-dropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="{{ route("users.show", [ "user" => Request::user() ]) }}"
+                                        >
+                                            Profil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="{{ route("logout") }}"
+                                        >
+                                            Delogeaza-te
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     @endauth
                 </ul>

@@ -57,7 +57,7 @@ class AnnouncementController extends Controller
     {
         return view("announcements.show", [
             "announcement" => $announcement,
-            "user" => $announcement->user()->first()
+            "users" => $announcement->user()->first()
         ]);
     }
 
