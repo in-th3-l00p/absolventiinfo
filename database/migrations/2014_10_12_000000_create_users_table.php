@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedSmallInteger("promotion_year");
             $table->char("class");
             $table->string("phone_number");
-            $table->text("description");
+            $table->text("description")->nullable();
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
