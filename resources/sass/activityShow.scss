@@ -1,0 +1,18 @@
+@import "./_variables.scss";
+
+#content-container {
+    display: flex;
+    gap: 3rem;
+
+    flex-direction: column;
+
+    @media (width >= map-get($grid-breakpoints, md)) {
+        flex-direction: row;
+        #content { order: 0; }
+        #activity-date {
+            order: 1;
+            white-space: nowrap;
+            align-self: start;
+        }
+    }
+}

@@ -20,7 +20,7 @@ const element = document.querySelector( '#editor' );
 ClassicEditor.create(element, {
     // plugins: [ SimpleUploadAdapter ],
     simpleUpload: {
-        uploadUrl: `/announcements/${id}/upload`,
+        uploadUrl: uploadRoute,
         withCredentials: true,
         headers: {
             "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") // have no idea why i need to send it :(

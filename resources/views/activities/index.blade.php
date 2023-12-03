@@ -6,13 +6,13 @@
 
 @section("content")
     <div class="container bg-white rounded-3 my-5 p-5 shadow">
-        <h1 class="mb-5">Anunturi</h1>
+        <h1 class="mb-5">Activitati</h1>
 
         <x-post-list
-            :posts="$announcements"
-            name="announcement"
-            empty="Nu a fost publicat niciun anunt"
+            :posts="$activities"
+            name="activity"
+            empty="Nu a fost publicat nicio activitate"
         />
-        {{ $announcements->links() }}
+        {{ $activities->links() }}
     </div>
 @endsection

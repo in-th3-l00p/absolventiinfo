@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
@@ -19,10 +20,24 @@ Route::post(
     "/announcements/{announcement}/upload",
     [AnnouncementController::class, "upload"]
 )->name("announcements.upload");
+
+Route::resource("activities", ActivityController::class)
+    ->except([ "delete" ]);
+Route::get(
+    "/activities/{activity}/edit/content",
+    [ActivityController::class, "editContent"]
+)->name("activities.edit.content");
+Route::post(
+    "/activities/{activity}/upload",
+    [ActivityController::class, "upload"]
+)->name("activities.upload");
+
 Route::resource("users", UserController::class)
     ->only(["show", "edit", "update"]);
 
 Route::prefix("admin")->middleware("admin")->group(function () {
-    Route::get("announcements", [AdminController::class, "announcements"])->name("admin.announcements");
-    Route::get("activities", [AdminController::class, "activities"])->name("admin.activities");
+    Route::get("announcements", [AdminController::class, "announcements"])
+        ->name("admin.announcements");
+    Route::get("activities", [AdminController::class, "activities"])
+        ->name("admin.activities");
 });

@@ -20,7 +20,7 @@
                         <a class="nav-link" href="{{ route("announcements.index") }}">Anunturi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Activitati</a>
+                        <a class="nav-link" href="{{ route("activities.index") }}">Activitati</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">

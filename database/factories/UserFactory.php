@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'promotion_year' => (string)(rand(1990, 2023)),
-            'class' => ["A", "B", "C", "D", "E"][rand(0, 5)],
+            'class' => ["A", "B", "C", "D", "E"][rand(0, 4)],
             'phone_number' => fake()->phoneNumber(),
             'description' => fake()->paragraph(),
             'email' => fake()->unique()->safeEmail(),

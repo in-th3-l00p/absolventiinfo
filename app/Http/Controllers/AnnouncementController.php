@@ -32,7 +32,14 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         $announcement = Announcement::create([
-            ...$request->validate([ "title" => "required|min:1|max:50|unique:announcements,title" ]),
+            ...$request->validate(
+                [ "title" => "required|min:1|max:50|unique:announcements,title" ],
+                [
+                    "title.required" => "Titlul este necesar",
+                    "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
+                    "title.unique" => "Titlul este deja folosit"
+                ]
+            ),
             "content" => "",
             "user_id" => Auth::user()->id
         ]);
@@ -75,9 +82,14 @@ class AnnouncementController extends Controller
                 "visibility" => "required|in:public,private"
             ]));
         } else {
-            $announcement->update($request->validate([
-                "title" => "required|min:1|max:50|unique:announcements,title"
-            ]));
+            $announcement->update($request->validate(
+                [ "title" => "required|min:1|max:50|unique:announcements,title" ],
+                [
+                    "title.required" => "Titlul este necesar",
+                    "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
+                    "title.unique" => "Titlul este deja folosit"
+                ]
+            ));
         }
 
         return redirect()->route("announcements.edit", [

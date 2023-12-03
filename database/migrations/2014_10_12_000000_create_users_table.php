@@ -26,7 +26,7 @@ return new class extends Migration
             $table->rememberToken();
 
             $table->boolean("activated")->default(true);
-            $table->enum("role", ["users", "admin"])->default("users");
+            $table->enum("role", ["user", "admin"])->default("user");
 
             $table->timestamps();
             $table->softDeletes();

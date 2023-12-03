@@ -1,13 +1,13 @@
 @extends("layouts.main")
 
 @section("content")
-    <main class="container mt-5 bg-white p-5 rounded-5 shadow">
+    <main class="container mt-5 bg-white p-5 rounded-3 shadow">
         <section class="grid pb-5 mb-5 border-bottom">
             <div class="row">
                 <img
                     src="/assets/default-profile.png"
                     alt="profile"
-                    class="col-2 me-5 rounded-5 border-2"
+                    class="col-2 me-5 rounded-3 border-2"
                 >
                 <div class="col">
                     <h2>{{ $user->first_name . " " . $user->last_name }}</h2>

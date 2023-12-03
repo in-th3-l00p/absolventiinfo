@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Http\Controllers\AnnouncementController;
+use App\Models\Activity;
 use App\Models\Announcement;
 use Illuminate\Database\Seeder;
 
@@ -27,5 +28,9 @@ class DatabaseSeeder extends Seeder
 
         Announcement::factory(12)->create();
         Announcement::factory()->private()->create();
+
+        Activity::factory(12)->create();
+        Activity::factory(5)->unjoinable()->create();
+        Activity::factory(5)->join_expired()->create();
     }
 }

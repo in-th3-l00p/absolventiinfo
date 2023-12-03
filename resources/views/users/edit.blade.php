@@ -9,9 +9,11 @@
         @csrf
         @method("PUT")
 
-        <h1 class="row mb-5">Editeaza profil</h1>
+        <div class="row">
+            <h1 class="col mb-5">Editeaza profil</h1>
+        </div>
         <div class="row mb-5">
-            <div class="col ps-0">
+            <div class="col">
                 <label for="first_name">Nume:</label>
                 <input
                     type="text"
@@ -24,7 +26,7 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="col pe-0">
+            <div class="col">
                 <label for="last_name">Prenume:</label>
                 <input
                     type="text"
@@ -39,31 +41,35 @@
             </div>
         </div>
         <div class="row mb-5">
-            <label for="description">Descriere:</label>
-            <textarea
-                class="form-control"
-                name="description"
-                id="description"
-            >{{ $user->description }}</textarea>
-            @error("description")
-                <p class="text-danger">{{ $message }}</p>
-            @enderror
+            <div class="col">
+                <label for="description">Descriere:</label>
+                <textarea
+                    class="form-control"
+                    name="description"
+                    id="description"
+                >{{ $user->description }}</textarea>
+                @error("description")
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
         </div>
         <div class="row mb-5">
-            <label for="email">Email:</label>
-            <input
-                type="email"
-                name="email"
-                id="email"
-                class="form-control"
-                value="{{ $user->email }}"
-            >
-            @error("email")
-                <p class="text-danger">{{ $message }}</p>
-            @enderror
+            <div class="col">
+                <label for="email">Email:</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control"
+                    value="{{ $user->email }}"
+                >
+                @error("email")
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
         </div>
         <div class="row mb-5">
-            <div class="col ps-0">
+            <div class="col">
                 <label for="promotion_year">An de absolvire:</label>
                 <select id="promotion_year" name="promotion_year" class="form-select">
                     @foreach(range(1600, now()->year) as $year)
@@ -78,7 +84,7 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="col pe-0">
+            <div class="col">
                 <label for="class">Clasa:</label>
                 <select id="class" name="class" class="form-select">
                     @foreach(["A", "B", "C", "D", "E"] as $class)
@@ -95,17 +101,19 @@
             </div>
         </div>
         <div class="row mb-5">
-            <label for="phone_number">Numar de telefon</label>
-            <input
-                type="tel"
-                name="phone_number"
-                id="phone_number"
-                class="form-control"
-                value="{{ $user->phone_number }}"
-            >
-            @error("phone_number")
-                <p class="text-danger">{{ $message }}</p>
-            @enderror
+            <div class="col">
+                <label for="phone_number">Numar de telefon</label>
+                <input
+                    type="tel"
+                    name="phone_number"
+                    id="phone_number"
+                    class="form-control"
+                    value="{{ $user->phone_number }}"
+                >
+                @error("phone_number")
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
         </div>
 
         <button type="submit" class="btn btn-dark">Editeaza</button>

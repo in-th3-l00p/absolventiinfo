@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 
@@ -7,7 +8,5 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource("announcements", AnnouncementController::class)->only(["update"])
     ->name("update", "api.announcements.update");
 
-
-Route::get("/", function () {
-    return (new \App\Http\Resources\Test(null));
-});
+Route::apiResource("activities", ActivityController::class)->only(["update"])
+    ->name("update", "api.activities.update");
