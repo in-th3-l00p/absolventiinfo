@@ -10,8 +10,20 @@
 
     <ul class="list-group mb-5" style="list-style: none">
         @forelse($posts as $post)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <h2>{{ $post->title }}</h2>
+            <li class="list-group-item d-flex gap-3 align-items-center">
+                <a
+                    href="{{ route(Str::plural($name) . ".show", [ $name => $post ]) }}"
+                    class="text-black me-auto"
+                >
+                    <h2>{{ $post->title }}</h2>
+                </a>
+                @if ($name === "activity")
+                    <a href="{{ route("activities.participants", ["activity" => $post]) }}">
+                        <button type="button" class="btn btn-primary">
+                            Participanti
+                        </button>
+                    </a>
+                @endif
                 <a href="{{ route(Str::plural($name) . ".edit", [$name => $post]) }}">
                     <button type="button" class="btn btn-dark">
                         Edit
@@ -19,7 +31,7 @@
                 </a>
             </li>
         @empty
-            <li class="text-center my-5">{{ $empty }}</li>
+            <li class="list-group-item text-center my-5">{{ $empty }}</li>
         @endforelse
     </ul>
     {{ $posts->links() }}

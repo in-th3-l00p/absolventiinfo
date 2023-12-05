@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,5 +75,16 @@ class UserController extends Controller
 
     // to be implemented
     public function destroy(User $user) {
+    }
+
+    public function activities() {
+        return view("users.activities", [
+            "activities" => Auth::user()
+                ->activities()
+                ->withPivot("accepted")
+                ->orderBy("accepted", "desc")
+                ->orderBy("start", "asc")
+                ->paginate(5)
+        ]);
     }
 }

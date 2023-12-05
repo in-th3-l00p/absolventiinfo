@@ -50,6 +50,7 @@ class AnnouncementController extends Controller
     }
 
     public function upload(Request $request, Announcement $announcement) {
+        $this->authorize("upload", $announcement);
         $path = Storage::disk("public")->put(
             "/announcements/" . $announcement->id,
             $request->file("upload")

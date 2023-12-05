@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActivityRequest;
 use App\Models\Activity;
 use App\Models\Announcement;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ActivityController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(Activity::class);
+    }
+
     public function index() {
         return view("activities.index", [
             "activities" => Activity::query()
@@ -18,43 +25,24 @@ class ActivityController extends Controller
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         return view("activities.create");
     }
 
-    public function store(Request $request)
-    {
-        $data = $request->validate(
-                [
-                    "title" => "required|min:1|max:50|unique:announcements,title",
-                    "start" => "required|date",
-                    "end" => "required|date",
-                    "max_joins" => "nullable|numeric",
-                    "join_expire" => "nullable|date"
-                ],
-                [
-                    "title.required" => "Titlul este necesar",
-                    "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
-                    "title.unique" => "Titlul este deja folosit",
-                    "start.required" => "Data de inceput este necesara",
-                    "end.required" => "Data de terminare este necesara"
-                ]
-        );
-
+    public function store(ActivityRequest $request) {
         if ($request->can_join) {
-            if ($data["max_joins"] === null)
+            if ($request->max_joins === null)
                 return back()->withErrors([
                     "max_joins" => "Numarul maxim de participanti este necesar"
                 ]);
-            if ($data["join_expire"] === null)
+            if ($request->join_expire === null)
                 return back()->withErrors([
                     "join_expire" => "Data de inchidere al inscrieri este necesara"
                 ]);
         }
 
         $activity = Activity::create([
-            ...$data,
+            ...$request->validated(),
             "can_join" => $request->can_join ? true : false,
             "content" => "",
             "user_id" => $request->user()->id,
@@ -64,6 +52,7 @@ class ActivityController extends Controller
     }
 
     public function upload(Request $request, Activity $activity) {
+        $this->authorize("upload", $activity);
         $path = Storage::disk("public")->put(
             "/activities/" . $activity->id,
             $request->file("upload")
@@ -74,10 +63,31 @@ class ActivityController extends Controller
         ];
     }
 
+    public function join(Activity $activity) {
+        $this->authorize("join", $activity);
+        if ($activity
+                ->users()
+                ->get()
+                ->where("id", "=", Auth::user()->id)
+                ->count() !== 0
+        ) {
+            $activity->users()->detach(Auth::user());
+            return redirect()->back();
+        }
+        $activity->users()->attach(Auth::user()->id, [
+            "accepted" => false,
+            "created_at" => now()
+        ]);
+        return redirect()->back();
+    }
+
     public function show(Activity $activity) {
+        $joined = $activity->isJoined(Auth::user());
         return view("activities.show", [
             "activity" => $activity,
-            "user" => $activity->user()->first()
+            "user" => $activity->user()->first(),
+            "joined" => $joined["joined"],
+            "accepted" => $joined["accepted"]
         ]);
     }
 
@@ -88,31 +98,13 @@ class ActivityController extends Controller
     }
 
     public function editContent(Activity $activity) {
+        $this->authorize("update", $activity);
         return view("activities.editContent", [
             "activity" => $activity
         ]);
     }
 
-    public function update(Request $request, Activity $activity)
-    {
-        $data = $request->validate(
-            [
-                "title" => "required|min:1|max:50|unique:announcements,title",
-                "start" => "required|date",
-                "end" => "required|date",
-                "visibility" => "required|in:public,private",
-                "max_joins" => "nullable|numeric",
-                "join_expire" => "nullable|date",
-            ],
-            [
-                "title.required" => "Titlul este necesar",
-                "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
-                "title.unique" => "Titlul este deja folosit",
-                "start.required" => "Data de inceput este necesara",
-                "end.required" => "Data de terminare este necesara"
-            ]
-        );
-
+    public function update(ActivityRequest $request, Activity $activity) {
         if ($request->can_join) {
             if ($data["max_joins"] === null)
                 return back()->withErrors([
@@ -125,7 +117,7 @@ class ActivityController extends Controller
         }
 
         $activity->update([
-            ...$data,
+            ...$request->validated(),
             "can_join" => $request->can_join ? true : false
         ]);
 
@@ -134,8 +126,34 @@ class ActivityController extends Controller
         ]);
     }
 
-    public function destroy(Activity $activity)
-    {
+    public function destroy(Activity $activity) {
         //
+    }
+
+    public function participants(Activity $activity) {
+        $this->authorize("participants", $activity);
+        return view("activities.participants", [
+            "activity" => $activity,
+            "users" => $activity
+                ->users()
+                ->withPivot("accepted")
+                ->paginate(10)
+        ]);
+    }
+
+    public function accept(Activity $activity, User $user) {
+        $this->authorize("accept", [ $activity, $user ]);
+        $activity
+            ->users()
+            ->updateExistingPivot($user->id, [
+                "accepted" => true
+            ]);
+        return redirect()->back();
+    }
+
+    public function reject(Activity $activity, User $user) {
+        $this->authorize("accept", [ $activity, $user ]);
+        $activity->users()->detach($user->id);
+        return redirect()->back();
     }
 }

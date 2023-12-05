@@ -42,4 +42,8 @@ class AnnouncementPolicy
     {
         return $user->role === "admin";
     }
+
+    public function upload(User $user, Announcement $announcement) {
+        return $user->role === "admin";
+    }
 }

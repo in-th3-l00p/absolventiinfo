@@ -61,6 +61,14 @@
                                             Profil
                                         </a>
                                     </li>
+                                    @if (Request::user()->role === "user")
+                                        <a
+                                            class="dropdown-item"
+                                            href="{{ route("users.activities") }}"
+                                        >
+                                            Activitatile tale
+                                        </a>
+                                    @endif
                                     <li>
                                         <a
                                             class="dropdown-item"
