@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             ->inRandomOrder()
             ->limit(3)
             ->get() as $user) {
-            $activity->users()->attach($user, [ "user" => $activity ]);
+            $activity->users()->attach($user, [ "accepted" => 1 ]);
         }
 
     }
