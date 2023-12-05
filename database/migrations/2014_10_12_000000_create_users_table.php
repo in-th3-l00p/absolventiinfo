@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->boolean("activated")->default(true);
+            $table->boolean("activated")->default(1);
             $table->enum("role", ["user", "admin"])->default("user");
 
             $table->timestamps();
