@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -35,6 +36,35 @@ class UserController extends Controller
     public function edit(User $user) {
         return view("users.edit", [
             "user" => $user
+        ]);
+    }
+
+    public function editPassword() {
+        return view("users.editPassword");
+    }
+
+    public function updatePassword(Request $request) {
+        $data = $request->validate([
+            "current_password" => "required",
+            "password" => "required|min:8|max:255|confirmed"
+        ], [
+            "password.required" => "Parola este necesara",
+            "password.min" => "Parola trebuie sa aiba minim 8 caractere",
+            "password.max" => "Parola poate avea maxim 255 de caractere",
+            "password.confirmed" => "Parolele nu se potrivesc"
+        ]);
+
+        if (!Hash::check($data["current_password"], Auth::user()->password))
+            return back()->withErrors([
+                "current_password" => "Parola curenta nu este corecta"
+            ]);
+
+        Auth::user()->update([
+            "password" => bcrypt($data["password"])
+        ]);
+
+        return redirect()->route("users.edit", [
+            "user" => Auth::user()
         ]);
     }
 

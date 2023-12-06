@@ -19,10 +19,7 @@
         <section class="d-flex flex-column gap-3">
             @if ($current_user)
                 <div>
-                    <a
-                        href="{{ route("users.edit", ["user" => $user]) }}"
-                        class="d-block"
-                    >
+                    <a href="{{ route("users.edit", ["user" => $user]) }}">
                         <button class="btn btn-dark">Editeaza</button>
                     </a>
                 </div>

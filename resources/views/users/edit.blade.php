@@ -117,5 +117,12 @@
         </div>
 
         <button type="submit" class="btn btn-dark">Editeaza</button>
+        @if ($user->id === Request::user()->id)
+            <a href="{{ route("users.edit.password") }}">
+                <button type="button" class="btn btn-secondary">
+                    Schimba parola
+                </button>
+            </a>
+        @endif
     </form>
 @endsection

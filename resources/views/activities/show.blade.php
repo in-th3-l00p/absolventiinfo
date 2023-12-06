@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="/ckeditor/content-styles.css">
 @endpush
 
+@push("scripts")
+    @vite(["resources/js/confirmForm.js"])
+@endpush
+
 @section("content")
     <section class="container my-5">
         <div id="content-container">

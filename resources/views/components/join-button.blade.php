@@ -1,7 +1,10 @@
 <form
     method="POST"
     action="{{ route("activities.join", [ "activity" => $activity ]) }}"
-    class="align-self-center"
+    @class([
+        "align-self-center",
+        "confirm-form" => $joined
+    ])
 >
     @csrf
     <button

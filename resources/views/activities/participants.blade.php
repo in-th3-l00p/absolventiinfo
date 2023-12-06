@@ -1,5 +1,9 @@
 @extends("layouts.admin")
 
+@push("scripts")
+    @vite(["resources/js/confirmForm.js"])
+@endpush
+
 @section("content")
     <div class="container shadow my-5 p-5 bg-white rounded-3 w-100">
         <div class="mb-5">
@@ -35,20 +39,28 @@
                             <button type="submit" class="btn btn-primary">Accepta</button>
                         </form>
 
-                        <form method="POST" action="{{ route("activities.reject", [
-                            "activity" => $activity,
-                            "user" => $user
-                        ]) }}">
+                        <form
+                            method="POST"
+                            action="{{ route("activities.reject", [
+                                "activity" => $activity,
+                                "user" => $user
+                            ]) }}"
+                            class="confirm-form"
+                        >
                             @csrf
                             @method("PUT")
 
                             <button type="submit" class="btn btn-danger">Respinge</button>
                         </form>
                     @else
-                        <form method="POST" action="{{ route("activities.reject", [
-                            "activity" => $activity,
-                            "user" => $user
-                        ]) }}">
+                        <form
+                            method="POST"
+                            action="{{ route("activities.reject", [
+                                "activity" => $activity,
+                                "user" => $user
+                            ]) }}"
+                            class="confirm-form"
+                        >
                             @csrf
                             @method("PUT")
 

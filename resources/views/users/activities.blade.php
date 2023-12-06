@@ -1,5 +1,9 @@
 @extends("layouts.main")
 
+@push("scripts")
+    @vite(["resources/js/confirmForm.js"])
+@endpush
+
 @section("content")
     <main class="container my-5 bg-white p-5 rounded-3 shadow">
         <h1 class="mb-5">Lista de activitati unde te-ai inscris:</h1>

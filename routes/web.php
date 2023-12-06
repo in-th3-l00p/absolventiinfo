@@ -31,6 +31,14 @@ Route::get(
 )->name("users.activities");
 Route::resource("users", UserController::class)
     ->only(["show", "edit", "update"]);
+Route::get(
+    "/users/edit/password",
+    [UserController::class, "editPassword"]
+)->name("users.edit.password");
+Route::put(
+    "/users/update/password",
+    [UserController::class, "updatePassword"]
+)->name("users.update.password");
 
 Route::prefix("admin")->middleware("admin")->group(function () {
     Route::get("announcements", [AdminController::class, "announcements"])

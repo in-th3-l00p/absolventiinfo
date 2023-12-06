@@ -33,7 +33,7 @@
                 href="{{ route("admin.users") }}"
                 @class([
                     "nav-link text-white",
-                    "bg-secondary" => $current === "activities"
+                    "bg-secondary" => $current === "users"
                 ])
                 aria-current="page"
             >
