@@ -29,16 +29,13 @@ Route::get(
     [UserController::class, "activities"]
 )->name("users.activities");
 Route::resource("users", UserController::class)
-    ->only(["show"]);
+    ->only(["show", "edit", "update"]);
 
 Route::prefix("admin")->middleware("admin")->group(function () {
     Route::get("announcements", [AdminController::class, "announcements"])
         ->name("admin.announcements");
     Route::get("activities", [AdminController::class, "activities"])
         ->name("admin.activities");
-
-    Route::resource("users", UserController::class)
-        ->only(["edit", "update"]);
 
     Route::resource("announcements", AnnouncementController::class)
         ->except([ "index", "show" ]);

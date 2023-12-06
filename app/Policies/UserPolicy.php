@@ -41,9 +41,4 @@ class UserPolicy
     {
         return $user->role === "admin";
     }
-
-    public function activities(User $user): bool {
-        dd("test");
-        return $user->role === "user";
-    }
 }

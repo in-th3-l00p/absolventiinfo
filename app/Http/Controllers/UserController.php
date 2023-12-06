@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -26,7 +27,7 @@ class UserController extends Controller
     public function show(User $user) {
         return view("users.show", [
             "user" => $user,
-            "current_user" => $user->id === Auth::user()->id
+            "current_user" => Auth::check() && $user->id === Auth::user()->id
         ]);
     }
 
@@ -78,7 +79,7 @@ class UserController extends Controller
     }
 
     public function activities() {
-        $this->authorize("activities");
+        Gate::allowIf(fn (User $user) => $user->role === "user");
         return view("users.activities", [
             "activities" => Auth::user()
                 ->activities()

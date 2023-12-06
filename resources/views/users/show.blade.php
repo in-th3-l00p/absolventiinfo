@@ -22,7 +22,7 @@
                     <p>An de absolvire: {{ $user->promotion_year }}</p>
                     <p>Clasa: {{ $user->class }}</p>
                 </div>
-                @if ($user->id === Request::user()->id)
+                @if ($current_user)
                     <div class="col-1">
                         <a href="{{ route("users.edit", ["user" => $user]) }}">
                             <button class="btn btn-dark">Editeaza</button>
