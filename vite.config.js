@@ -12,7 +12,8 @@ export default defineConfig({
                 'resources/sass/activityShow.scss',
                 'resources/js/editor.js',
                 'resources/js/app.js',
-                'resources/js/activityForm.js'
+                'resources/js/activityForm.js',
+                'resources/js/confirmForm.js'
             ],
             refresh: true,
         }),
