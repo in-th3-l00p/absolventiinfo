@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index() { }
 
     // not implemented
-    public function create() {  }
+    public function create() { }
 
     // not implemented
     public function store(Request $request) {  }
@@ -46,7 +46,7 @@ class UserController extends Controller
             "email" => "required|email|min:1|max:255" . ($request->email === $user->email ? "" : "|unique:users,email"),
             "promotion_year" => "required|numeric|max:" . now()->year,
             "class" => "required|in:A,B,C,D,E",
-            "phone_number" => "required|min:1|max:12",
+            "phone_number" => "required|min:1|max:12"
         ], [
             "first_name.required" => "Numele este necesar",
             "first_name.max" => "Numele poate avea maxim 50 de caractere",

@@ -57,7 +57,8 @@ class DatabaseSeeder extends Seeder
             ->where("role", "=", "user")
             ->inRandomOrder()
             ->limit(3)
-            ->get() as $user) {
+            ->get() as $user)
+        {
             $activity->users()->attach($user, [ "accepted" => 1 ]);
         }
 

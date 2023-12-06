@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Announcement;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,7 +21,9 @@ class AdminController extends Controller
         ]);
     }
 
-//    public function users() {
-//        return view("admin.users");
-//    }
+    public function users() {
+        return view("admin.users", [
+            "users" => User::query()->latest()->paginate(7)
+        ]);
+    }
 }

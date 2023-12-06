@@ -2,7 +2,14 @@
 
 @section("content")
     <div class="container shadow my-5 p-5 bg-white rounded-3 w-100">
-        <h1 class="mb-5">Participantii activitatii: {{ $activity->title }}</h1>
+        <div class="mb-5">
+            <h1>Participantii activitatii: {{ $activity->title }}</h1>
+            @error("max_joins")
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+
+
         <ul class="list-group">
             @forelse ($users as $user)
                 <li class="list-group-item d-flex gap-3 align-items-center">

@@ -53,4 +53,10 @@ class Activity extends Model
             "accepted" => $accepted
         ];
     }
+
+    public function getAcceptedCount() {
+        return $this->users()
+            ->wherePivot("accepted", "=", 1)
+            ->count();
+    }
 }

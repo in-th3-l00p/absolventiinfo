@@ -13,6 +13,7 @@ Route::view("/login", "auth.login")->name("login");
 Route::post("/login", [AuthController::class, "login"])->name("login.submit");
 Route::get("/logout", [AuthController::class, "logout"])->name("logout");
 Route::view("/register", "auth.register")->name("register");
+Route::post("/register", [AuthController::class, "register"])->name("register.submit");
 
 Route::resource("announcements", AnnouncementController::class)
     ->only([ "index", "show" ]);
@@ -36,6 +37,8 @@ Route::prefix("admin")->middleware("admin")->group(function () {
         ->name("admin.announcements");
     Route::get("activities", [AdminController::class, "activities"])
         ->name("admin.activities");
+    Route::get("users", [AdminController::class, "users"])
+        ->name("admin.users");
 
     Route::resource("announcements", AnnouncementController::class)
         ->except([ "index", "show" ]);

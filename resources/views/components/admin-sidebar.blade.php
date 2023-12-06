@@ -30,9 +30,10 @@
         </li>
         <li class="nav-item">
             <a
-                href="#"
+                href="{{ route("admin.users") }}"
                 @class([
-                    "nav-link text-white"
+                    "nav-link text-white",
+                    "bg-secondary" => $current === "activities"
                 ])
                 aria-current="page"
             >

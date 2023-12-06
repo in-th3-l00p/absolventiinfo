@@ -145,6 +145,10 @@ class ActivityController extends Controller
 
     public function accept(Activity $activity, User $user) {
         $this->authorize("accept", [ $activity, $user ]);
+        if ($activity->getAcceptedCount() >= $activity->max_joins)
+            return back()->withErrors([
+                "max_joins" => "Numarul de participanti a trecut de limita"
+            ]);
         $activity
             ->users()
             ->updateExistingPivot($user->id, [

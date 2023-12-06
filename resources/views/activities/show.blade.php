@@ -25,7 +25,9 @@
                             $activity->can_join && Request::user() !== null &&
                             Request::user()->role === "user"
                     )
-                        <p class="text-muted">{{ $activity->users()->count() }} / {{ $activity->max_joins }} participanti inscrisi</p>
+                        <p class="text-muted">
+                            {{ $activity->getAcceptedCount() }} / {{ $activity->max_joins }} participanti inscrisi
+                        </p>
                         <x-join-button :activity="$activity" />
                         <p class="mt-3 mb-0">
                             @if ($joined)
