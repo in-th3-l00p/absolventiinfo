@@ -5,7 +5,7 @@
         >
             <a
                 href="{{ route(Str::plural($name) . ".show", [$name => $post]) }}"
-                class="post"
+                class="post text-black text-decoration-none"
             >
                 <h3>{{ $post->title }}</h3>
                 <p class="description">{!! $post->getDescription() !!}</p>

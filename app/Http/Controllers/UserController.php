@@ -78,6 +78,7 @@ class UserController extends Controller
     }
 
     public function activities() {
+        $this->authorize("activities");
         return view("users.activities", [
             "activities" => Auth::user()
                 ->activities()

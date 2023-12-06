@@ -11,26 +11,33 @@
             <div id="activity-date" class="shadow bg-white rounded-3 p-5 text-center">
                 <span @class([
                     "d-block mb-4 pb-2 border-bottom" =>
-                        $activity->can_join && Request::user() !== null && Request::user()->role === "user"
+                        $activity->can_join &&
+                        Request::user() !== null &&
+                        Request::user()->role === "user"
                 ])>
                     <h3 class="mb-3">Data evenimentului</h3>
                     <p>Incepe pe: {{ \Carbon\Carbon::make($activity->start) }}</p>
                     <p>Se termina pe: {{ \Carbon\Carbon::make($activity->end) }}</p>
                 </span>
 
-                @if ($activity->can_join && Request::user() !== null && Request::user()->role === "user")
-                    <p class="text-muted">{{ $activity->users()->count() }} / {{ $activity->max_joins }} participanti inscrisi</p>
-                    <x-join-button :activity="$activity" />
-                    <p class="mt-3 mb-0">
-                        @if ($joined)
-                            @if ($accepted)
-                                Ai fost acceptat!
-                            @else
-                                Solicitarea de a participa a fost trimisa!
+                @auth
+                    @if (
+                            $activity->can_join && Request::user() !== null &&
+                            Request::user()->role === "user"
+                    )
+                        <p class="text-muted">{{ $activity->users()->count() }} / {{ $activity->max_joins }} participanti inscrisi</p>
+                        <x-join-button :activity="$activity" />
+                        <p class="mt-3 mb-0">
+                            @if ($joined)
+                                @if ($accepted)
+                                    Ai fost acceptat!
+                                @else
+                                    Solicitarea de a participa a fost trimisa!
+                                @endif
                             @endif
-                        @endif
-                    </p>
-                @endif
+                        </p>
+                    @endif
+                @endauth
             </div>
             <div id="content" class="shadow bg-white rounded-3 p-5">
                 <div class="mb-3 pb-3 border-bottom">

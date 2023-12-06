@@ -82,7 +82,9 @@ class ActivityController extends Controller
     }
 
     public function show(Activity $activity) {
-        $joined = $activity->isJoined(Auth::user());
+        $joined = [ "joined" => false, "accepted" => false ];
+        if (Auth::check())
+            $joined = $activity->isJoined(Auth::user());
         return view("activities.show", [
             "activity" => $activity,
             "user" => $activity->user()->first(),
