@@ -77,4 +77,7 @@ Route::prefix("admin")->middleware("admin")->group(function () {
         "/activities/{activity}/reject/{user}",
         [ActivityController::class, "reject"]
     )->name("activities.reject");
+
+    Route::resource("users", UserController::class)
+        ->only("destroy");
 });

@@ -28,45 +28,12 @@
                         <p>An de absolvire: {{ $user->promotion_year }}</p>
                     </div>
 
-                    @if (!$user->pivot->accepted)
-                        <form method="POST" action="{{ route("activities.accept", [
-                            "activity" => $activity,
-                            "user" => $user
-                        ]) }}">
-                            @csrf
-                            @method("PUT")
-
-                            <button type="submit" class="btn btn-primary">Accepta</button>
-                        </form>
-
-                        <form
-                            method="POST"
-                            action="{{ route("activities.reject", [
-                                "activity" => $activity,
-                                "user" => $user
-                            ]) }}"
-                            class="confirm-form"
-                        >
-                            @csrf
-                            @method("PUT")
-
-                            <button type="submit" class="btn btn-danger">Respinge</button>
-                        </form>
-                    @else
-                        <form
-                            method="POST"
-                            action="{{ route("activities.reject", [
-                                "activity" => $activity,
-                                "user" => $user
-                            ]) }}"
-                            class="confirm-form"
-                        >
-                            @csrf
-                            @method("PUT")
-
-                            <button type="submit" class="btn btn-danger">Sterge</button>
-                        </form>
-                    @endif
+                    <x-admin.participant-actions
+                        :user="$user"
+                        :activity="$activity"
+                        :accepted="$user->pivot->accepted"
+                        class="d-flex gap-3 flex-wrap"
+                    />
                 </li>
             @empty
                 <li class="list-group-item text-center my-5">Nu exista niciun participant</li>

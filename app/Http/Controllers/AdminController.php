@@ -11,19 +11,19 @@ class AdminController extends Controller
 {
     public function announcements() {
         return view("admin.announcements", [
-            "announcements" => Announcement::query()->latest()->paginate(5)
+            "announcements" => Announcement::query()->latest()->paginate(7)
         ]);
     }
 
     public function activities() {
         return view("admin.activities", [
-            "activities" => Activity::query()->latest()->paginate(5)
+            "activities" => Activity::query()->latest()->paginate(7)
         ]);
     }
 
     public function users() {
         return view("admin.users", [
-            "users" => User::query()->latest()->paginate(7)
+            "users" => User::query()->latest()->paginate(5)
         ]);
     }
 }

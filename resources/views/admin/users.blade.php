@@ -1,5 +1,9 @@
 @extends("layouts.admin")
 
+@push("scripts")
+    @vite([ "resources/js/confirmForm.js" ])
+@endpush
+
 @section("content")
     <section class="flex-grow-1 d-flex h-100">
         <x-admin-sidebar />
@@ -25,6 +29,19 @@
                             <p>Numar de telefon: {{ $user->phone_number }}</p>
                             <p>Descriere: {{ $user->description }}</p>
                         </div>
+
+                        <form
+                            method="POST"
+                            action="{{ route("users.destroy", [ "user" => $user ]) }}"
+                            class="confirm-form"
+                        >
+                            @csrf
+                            @method("DELETE")
+
+                            <button type="submit" class="btn btn-danger">
+                                Sterge
+                            </button>
+                        </form>
                         <a href="{{ route("users.edit", ["user" => $user]) }}">
                             <button type="button" class="btn btn-dark">
                                 Edit

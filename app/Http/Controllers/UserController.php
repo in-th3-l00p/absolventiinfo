@@ -104,8 +104,9 @@ class UserController extends Controller
         ]);
     }
 
-    // to be implemented
     public function destroy(User $user) {
+        $user->delete();
+        return redirect()->back();
     }
 
     public function activities() {

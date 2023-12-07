@@ -29,11 +29,51 @@
                 <p>An de absolvire: {{ $user->promotion_year }}</p>
                 <p>Clasa: {{ $user->class }}</p>
             </div>
-            @if ($current_user)
+            @if ($current_user || Request::user() !== null && Request::user()->role === "admin")
                 <div>
                     <h3>Informatii private</h3>
                     <p>Email: {{ $user->email }}</p>
                     <p>Numar de telefon: {{ $user->phone_number }} </p>
+                </div>
+            @endif
+
+            @if (Request::user() !== null && Request::user()->role === "admin")
+                <div>
+                    <h3>Activitati la care participa</h3>
+
+                    <ul class="list-group">
+                        @forelse($user->activities()->withPivot("accepted")->get() as $activity)
+                            <li class="list-group-item grid">
+                                <div class="row">
+                                    <a
+                                        href="{{ route("activities.show", ["activity" => $activity]) }}"
+                                        class="text-black col"
+                                    >
+                                        <h3>{{ $activity->title }}</h3>
+                                    </a>
+                                    <p class="col">
+                                        @if ($activity->pivot->accepted)
+                                            Acceptat
+                                        @else
+                                            In asteptare
+                                        @endif
+                                    </p>
+
+                                    <x-admin.participant-actions
+                                        :user="$user"
+                                        :activity="$activity"
+                                        :accepted="$activity->pivot->accepted"
+                                        class="col d-flex gap-3 justify-content-end align-items-center flex-wrap"
+                                    />
+                                </div>
+                            </li>
+
+                        @empty
+                            <li class="list-group-item">
+                                Utilizatorul nu participa la nicio activitate
+                            </li>
+                        @endforelse
+                    </ul>
                 </div>
             @endif
         </section>
