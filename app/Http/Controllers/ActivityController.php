@@ -129,7 +129,9 @@ class ActivityController extends Controller
     }
 
     public function destroy(Activity $activity) {
-        //
+//        $activity->users()->detach();
+        $activity->delete();
+        return redirect()->back();
     }
 
     public function participants(Activity $activity) {
@@ -157,6 +159,7 @@ class ActivityController extends Controller
         return redirect()->back();
     }
 
+    // I feel this one ngl :))
     public function reject(Activity $activity, User $user) {
         $this->authorize("accept", [ $activity, $user ]);
         $activity->users()->detach($user->id);

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->string("title")->unique();
             $table->text("content");

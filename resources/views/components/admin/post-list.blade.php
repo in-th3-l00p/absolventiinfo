@@ -1,3 +1,7 @@
+@push("scripts")
+    @vite([ "resources/js/confirmForm.js" ])
+@endpush
+
 <div class="container shadow my-5 p-5 bg-white rounded-3 w-100">
     <div class="container d-flex justify-content-between align-items-center mb-5">
         <h1>{{ $title }}</h1>
@@ -28,6 +32,19 @@
                     <button type="button" class="btn btn-dark">
                         Edit
                     </button>
+                </a>
+                <form
+                    method="POST"
+                    action="{{ route(Str::plural($name) . ".destroy", [$name => $post]) }}"
+                    class="confirm-form"
+                >
+                    @csrf
+                    @method("DELETE")
+
+                    <button type="submit" class="btn btn-danger">
+                        Sterge
+                    </button>
+                </form>
                 </a>
             </li>
         @empty

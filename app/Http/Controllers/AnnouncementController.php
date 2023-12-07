@@ -98,11 +98,8 @@ class AnnouncementController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Announcement $announcement)
-    {
-        //
+    public function destroy(Announcement $announcement) {
+        $announcement->delete();
+        return redirect()->back();
     }
 }
