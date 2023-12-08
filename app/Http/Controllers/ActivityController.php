@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ActivityRequest;
+use App\Jobs\InviteToActivity;
 use App\Mail\InviteMail;
 use App\Models\Activity;
 use App\Models\Announcement;
@@ -184,14 +185,7 @@ class ActivityController extends Controller
         ]);
 
         $activity = Activity::findOrFail($data["activity"]);
-
-        foreach (
-            User::query()->where("role", "=", "user")->get() as
-            $user
-        ) {
-            Mail::to($user->email)->queue(new InviteMail($activity, $data["text"]));
-            error_log("Sent to " . $user->email . "invite");
-        }
+        InviteToActivity::dispatch($activity, $data["text"]);
 
         return redirect()->route("admin.activities");
     }

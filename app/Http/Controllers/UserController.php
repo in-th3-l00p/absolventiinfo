@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UploadUsers;
 use App\Mail\WelcomeMail;
 use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Queue\Queue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -158,26 +160,7 @@ class UserController extends Controller
             "file" => "required|file"
         ]);
 
-        $file = fopen($data["file"], "r");
-        $row = fgetcsv($file, 1000, ","); // skipping first one
-        while (($row = fgetcsv($file, 1000, ",")) !== false) {
-            $password = Str::random(12);
-            $user = User::create([
-                "first_name" => $row[1],
-                "last_name" => $row[2],
-                "birth_name" => $row[3],
-                "email" => $row[4],
-                "phone_number" => $row[5],
-                "promotion_year" => $row[6],
-                "class" => $row[7],
-                "password" => Hash::make($password)
-            ]);
-
-            Mail::to($user)->queue(new WelcomeMail($user, $password));
-            error_log("User " . $user->email . " created");
-        }
-
-        fclose($file);
+        UploadUsers::dispatch($data["file"]->getRealPath());
         return redirect()->back();
     }
 
