@@ -34,6 +34,8 @@ class UploadUsers implements ShouldQueue
         for ($i = 1; $i < count($matrix); $i++) {
             $row = str_getcsv($matrix[$i], ",");
             $password = Str::random(12);
+            if (User::query()->where("email", "=", $row[4])->exists())
+                continue;
             $user = User::create([
                 "first_name" => $row[1],
                 "last_name" => $row[2],
