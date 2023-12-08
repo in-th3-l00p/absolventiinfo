@@ -77,6 +77,10 @@ Route::prefix("admin")->middleware("admin")->group(function () {
         "/activities/{activity}/reject/{user}",
         [ActivityController::class, "reject"]
     )->name("activities.reject");
+    Route::put(
+        "/activities/{activity}/content",
+        [ActivityController::class, "updateContent"]
+    )->name("activities.update.content");
 
     Route::get(
         "/activities/invite",

@@ -13,7 +13,8 @@ class PostEditor extends Component
      */
     public function __construct(
         public string $name,
-        public mixed $post
+        public mixed $post,
+        public string $updateRoute
     ) {
         //
     }

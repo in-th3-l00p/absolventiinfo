@@ -6,6 +6,7 @@ use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use function Laravel\Prompts\error;
 
 class AnnouncementController extends Controller
 {
@@ -78,20 +79,19 @@ class AnnouncementController extends Controller
 
     public function update(Request $request, Announcement $announcement)
     {
-        if ($request->title === $announcement->title) {
-            $announcement->update($request->validate([
-                "visibility" => "required|in:public,private"
-            ]));
-        } else {
-            $announcement->update($request->validate(
-                [ "title" => "required|min:1|max:50|unique:announcements,title" ],
-                [
-                    "title.required" => "Titlul este necesar",
-                    "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
-                    "title.unique" => "Titlul este deja folosit"
-                ]
-            ));
-        }
+        $announcement->update($request->validate(
+            [
+                "title" => "required|min:1|max:50" .
+                    ($request->title === $announcement->title ? "" : "|unique:announcements,title"),
+                "visibility" => "required|in:public,private",
+                "content" => "required"
+            ],
+            [
+                "title.required" => "Titlul este necesar",
+                "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
+                "title.unique" => "Titlul este deja folosit"
+            ]
+        ));
 
         return redirect()->route("announcements.edit", [
             "announcement" => $announcement

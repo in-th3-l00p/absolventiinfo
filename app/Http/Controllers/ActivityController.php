@@ -109,6 +109,27 @@ class ActivityController extends Controller
         ]);
     }
 
+    public function updateContent(Request $request, Activity $activity) {
+        $this->authorize("update", $activity);
+        $activity->update($request->validate(
+            [
+                "title" => "required|min:1|max:50" .
+                    ($request->title === $activity->title ? "" : "|unique:activities,title"),
+                "visibility" => "required|in:public,private",
+                "content" => "required"
+            ],
+            [
+                "title.required" => "Titlul este necesar",
+                "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
+                "title.unique" => "Titlul este deja folosit"
+            ]
+        ));
+
+        return redirect()->route("activities.edit.content", [
+            "activity" => $activity
+        ]);
+    }
+
     public function update(ActivityRequest $request, Activity $activity) {
         if ($request->can_join) {
             if ($data["max_joins"] === null)

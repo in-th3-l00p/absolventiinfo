@@ -1,5 +1,3 @@
-import axios from "axios";
-
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -30,22 +28,18 @@ ClassicEditor.create(element, {
     .then(editor => {
         editor.setData(content || "");
         window.editor = editor;
-
-        const save = async () => {
-            await axios.put(updateRoute, {
-                content: editor.getData()
-            }, {
-                withCredentials: true
-            });
-        }
-
-        // saves each 5 sec
-        setInterval(save, 5000);
-        window.onbeforeunload = save;
-
-        document.querySelector("#visibility").onchange = () => {
-            document
-                .querySelector("#main-form")
-                .submit();
-        }
     });
+
+document.querySelector("#main-form").onsubmit = (e) => {
+    const content = window.editor.getData();
+    document.querySelector("#content").value = content;
+    return true;
+}
+
+window.addEventListener("beforeunload", function (e) {
+    let confirmationMessage = 'It looks like you have been editing something. '
+        + 'If you leave before saving, your changes will be lost.';
+
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+});

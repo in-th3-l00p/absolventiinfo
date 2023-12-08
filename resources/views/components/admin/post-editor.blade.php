@@ -8,9 +8,7 @@
     <script src="/ckeditor/ckeditor.js"></script>
     <script>
         var content = `{!! $post->content !!}`;
-        var updateRoute = `{{ route("api." . Str::plural($name) . ".update", [ $name => $post ]) }}`;
         var uploadRoute = `{{ route(Str::plural($name) . ".upload", [ $name => $post ]) }}`
-        var id = `{{ $post->id }}`;
     </script>
     @vite(["resources/js/editor.js"])
 @endpush
@@ -18,8 +16,8 @@
 @section("content")
     <form
         method="POST"
-        action="{{ route(Str::plural($name) . ".update", [ $name => $post ]) }}"
-        class="d-flex flex-wrap align-items-center justify-content-between container py-3"
+        action="{{ $updateRoute }}"
+        class="d-flex flex-wrap gap-3 align-items-center container py-3"
         id="main-form"
     >
         @csrf
@@ -27,14 +25,12 @@
 
         <label for="title" hidden>Titlu</label>
         <input
-            class="bg-transparent border-0"
+            class="bg-transparent border-0 me-auto"
             style="font-size: 2rem"
             name="title"
             id="title"
             value="{{ $post->title }}"
         >
-
-        <button type="submit" hidden></button>
 
         <label for="visibility" hidden>Visibilitate</label>
         <select name="visibility" id="visibility">
@@ -55,6 +51,10 @@
                 Privat
             </option>
         </select>
+        <input type="text" name="content" id="content" hidden>
+        <button type="submit" id="submit" class="btn btn-primary">
+            Salveaza
+        </button>
     </form>
     <div id="editor"></div>
 @endsection
