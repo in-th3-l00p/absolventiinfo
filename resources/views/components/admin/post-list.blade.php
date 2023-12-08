@@ -5,11 +5,20 @@
 <div class="container shadow my-5 p-5 bg-white rounded-3 w-100">
     <div class="container d-flex justify-content-between align-items-center mb-5">
         <h1>{{ $title }}</h1>
-        <a href="{{ route(Str::plural($name) . ".create") }}">
-            <button class="btn btn-secondary">
-                +
-            </button>
-        </a>
+        <div class="d-flex flex-wrap gap-3">
+            @if ($name === "activity")
+                <a href="{{ route(Str::plural($name) . ".invite") }}">
+                    <button class="btn btn-secondary" title="Invita utilizatori">
+                        <img src="/assets/invite.svg" alt="invite" style="width: 20px; filter: invert(100%)">
+                    </button>
+                </a>
+            @endif
+            <a href="{{ route(Str::plural($name) . ".create") }}">
+                <button class="btn btn-secondary">
+                    +
+                </button>
+            </a>
+        </div>
     </div>
 
     <ul class="list-group mb-5" style="list-style: none">

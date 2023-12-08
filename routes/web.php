@@ -78,6 +78,15 @@ Route::prefix("admin")->middleware("admin")->group(function () {
         [ActivityController::class, "reject"]
     )->name("activities.reject");
 
+    Route::get(
+        "/activities/invite",
+        [ActivityController::class, "invite"]
+    )->name("activities.invite");
+    Route::post(
+        "/activities/invite",
+        [ActivityController::class, "inviteSubmit"]
+    )->name("activities.invite.submit");
+
     Route::resource("users", UserController::class)
         ->only("destroy");
     Route::post("/users/upload", [UserController::class, "upload"])

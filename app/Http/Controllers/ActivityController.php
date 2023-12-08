@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ActivityRequest;
+use App\Mail\InviteMail;
 use App\Models\Activity;
 use App\Models\Announcement;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ActivityController extends Controller
@@ -164,5 +166,33 @@ class ActivityController extends Controller
         $this->authorize("accept", [ $activity, $user ]);
         $activity->users()->detach($user->id);
         return redirect()->back();
+    }
+
+    public function invite() {
+        return view("activities.invite", [
+            "activities" => Activity
+                ::query()
+                ->select("id", "title")
+                ->get()
+        ]);
+    }
+
+    public function inviteSubmit(Request $request) {
+        $data = $request->validate([
+            "activity" => "required|exists:activities,id",
+            "text" => "required|string|max:2000"
+        ]);
+
+        $activity = Activity::findOrFail($data["activity"]);
+
+        foreach (
+            User::query()->where("role", "=", "user")->get() as
+            $user
+        ) {
+            Mail::to($user->email)->queue(new InviteMail($activity, $data["text"]));
+            error_log("Sent to " . $user->email . "invite");
+        }
+
+        return redirect()->route("admin.activities");
     }
 }

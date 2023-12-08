@@ -45,7 +45,7 @@
                     @endif
                 @endauth
             </div>
-            <div id="content" class="shadow bg-white rounded-3 p-5">
+            <div id="content" class="w-100 shadow bg-white rounded-3 p-5">
                 <div class="mb-3 pb-3 border-bottom">
                     <h1>{{ $activity->title }}</h1>
                     <p class="text-secondary">Creat pe: {{ $activity->created_at }}</p>
