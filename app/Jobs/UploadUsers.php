@@ -23,15 +23,16 @@ class UploadUsers implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        public $path
+        public $content
     ) {
+
     }
 
     public function handle(): void
     {
-        $file = fopen($this->path, "r");
-        $row = fgetcsv($file, 1000, ","); // skipping first one
-        while (($row = fgetcsv($file, 1000, ",")) !== false) {
+        $matrix = str_getcsv($this->content, "\n");
+        for ($i = 1; $i < count($matrix); $i++) {
+            $row = str_getcsv($matrix[$i], ",");
             $password = Str::random(12);
             $user = User::create([
                 "first_name" => $row[1],
@@ -47,7 +48,5 @@ class UploadUsers implements ShouldQueue
             Mail::to($user)->queue(new WelcomeMail($user, $password));
             error_log("User " . $user->email . " created");
         }
-
-        fclose($file);
     }
 }

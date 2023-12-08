@@ -160,7 +160,7 @@ class UserController extends Controller
             "file" => "required|file"
         ]);
 
-        UploadUsers::dispatch($data["file"]->getRealPath());
+        UploadUsers::dispatch(file_get_contents($data["file"]->getRealPath()));
         return redirect()->back();
     }
 
