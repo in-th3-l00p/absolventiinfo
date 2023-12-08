@@ -130,7 +130,22 @@ class ActivityController extends Controller
         ]);
     }
 
-    public function update(ActivityRequest $request, Activity $activity) {
+    public function update(Request $request, Activity $activity) {
+        $data = $request->validate([
+            "title" => "required|min:1|max:50" .
+                ($request->title === $activity->title ? "" : "|unique:activities,title"),
+            "start" => "required|date",
+            "end" => "required|date",
+            "max_joins" => "nullable|numeric",
+            "join_expire" => "nullable|date"
+        ], [
+            "title.required" => "Titlul este necesar",
+            "title.max" => "Titlul trebuie sa aiba maxim 50 de caractere",
+            "title.unique" => "Titlul este deja folosit",
+            "start.required" => "Data de inceput este necesara",
+            "end.required" => "Data de terminare este necesara"
+        ]);
+
         if ($request->can_join) {
             if ($data["max_joins"] === null)
                 return back()->withErrors([
@@ -143,7 +158,7 @@ class ActivityController extends Controller
         }
 
         $activity->update([
-            ...$request->validated(),
+            ...$data,
             "can_join" => $request->can_join ? true : false
         ]);
 
