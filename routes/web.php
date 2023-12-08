@@ -80,4 +80,6 @@ Route::prefix("admin")->middleware("admin")->group(function () {
 
     Route::resource("users", UserController::class)
         ->only("destroy");
+    Route::post("/users/upload", [UserController::class, "upload"])
+        ->name("users.upload");
 });

@@ -1,7 +1,10 @@
 @extends("layouts.admin")
 
 @push("scripts")
-    @vite([ "resources/js/confirmForm.js" ])
+    @vite([
+        "resources/js/confirmForm.js",
+        "resources/js/admin/users.js"
+    ])
 @endpush
 
 @section("content")
@@ -9,7 +12,27 @@
         <x-admin-sidebar />
 
         <div class="container shadow my-5 p-5 bg-white rounded-3 w-100">
-            <h1>Conturi</h1>
+            <div class="container d-flex justify-content-between align-items-center mb-5">
+                <h1>Conturi</h1>
+                <form
+                    method="POST"
+                    action="{{ route("users.upload") }}"
+                    id="upload-form"
+                    enctype="multipart/form-data"
+                >
+                    @csrf
+
+                    <input type="file" name="file" id="file" hidden>
+                    <button type="button" id="upload-btn" class="btn btn-secondary">
+                        +
+                    </button>
+                </form>
+            </div>
+            @error("file")
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <ul class="list-group mb-5" style="list-style: none">
                 @forelse ($users as $user)

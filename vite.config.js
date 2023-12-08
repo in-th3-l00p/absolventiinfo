@@ -13,7 +13,8 @@ export default defineConfig({
                 'resources/js/editor.js',
                 'resources/js/app.js',
                 'resources/js/activityForm.js',
-                'resources/js/confirmForm.js'
+                'resources/js/confirmForm.js',
+                'resources/js/admin/users.js',
             ],
             refresh: true,
         }),

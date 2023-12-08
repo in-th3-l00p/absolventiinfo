@@ -5,7 +5,7 @@
         <section class="grid pb-5 mb-5 border-bottom">
             <div class="row d-flex flex-wrap gap-5">
                 <img
-                    src="/assets/default-profile.png"
+                    src="{{ $user->pfp_path ? "/storage/" . $user->pfp_path :  "/assets/default-profile.png" }}"
                     alt="profile"
                     class="col-2 me-5 rounded-3 border-2"
                     style="width: 178px; height: 154px;"
@@ -13,6 +13,29 @@
                 <div class="col">
                     <h2>{{ $user->first_name . " " . $user->last_name }}</h2>
                     <p>{{ $user->description }}</p>
+                    @if ($user->role === "admin")
+                        <p>Administrator</p>
+                    @endif
+                    @if ($user->cv_link)
+                        <a href="{{ $user->cv_link }}" class="text-black">
+                            <p>Link CV: {{ $user->cv_link }}</p>
+                        </a>
+                    @endif
+                    @if ($user->facebook_link)
+                        <a href="{{ $user->facebook_link }}" class="text-black">
+                            <p>Link Facebook: {{ $user->facebook_link }}</p>
+                        </a>
+                    @endif
+                    @if ($user->instagram_link)
+                        <a href="{{ $user->instagram_link }}" class="text-black">
+                            <p>Link Instagram: {{ $user->instagram_link }}</p>
+                        </a>
+                    @endif
+                    @if ($user->linkedin_link)
+                        <a href="{{ $user->linkedin_link }}" class="text-black">
+                            <p>Link LinkedIn: {{ $user->linkedin_link }}</p>
+                        </a>
+                    @endif
                 </div>
             </div>
         </section>

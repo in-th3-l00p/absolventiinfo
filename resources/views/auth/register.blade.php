@@ -5,6 +5,7 @@
         method="POST"
         action="{{ route("register.submit") }}"
         class="container my-5 grid"
+        enctype="multipart/form-data"
     >
         @csrf
 
@@ -26,16 +27,6 @@
                 <input type="text" id="last_name" name="last_name" class="form-control" value="{{ old("last_name") }}">
                 @error('last_name')
                     <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" class="form-control" value="{{ old("email") }}">
-                @error('email')
-                <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
         </div>
@@ -77,6 +68,97 @@
                 @enderror
             </div>
         </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="cv_link">Link CV <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="cv_link"
+                    name="cv_link"
+                    class="form-control"
+                    value="{{ old("cv_link") }}"
+                >
+                @error('cv_link')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="facebook_link">Link Facebook <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="facebook_link"
+                    name="facebook_link"
+                    class="form-control"
+                    value="{{ old("facebook_link") }}"
+                >
+                @error('facebook_link')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="instagram_link">Link Instagram <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="instagram_link"
+                    name="instagram_link"
+                    class="form-control"
+                    value="{{ old("instagram_link") }}"
+                >
+                @error('instagram_link')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="linkedin_link">Link LinkedIn <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="linkedin_link"
+                    name="linkedin_link"
+                    class="form-control"
+                    value="{{ old("linkedin_link") }}"
+                >
+                @error('linkedin_link')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="pfp">Imagine de profil: <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="file"
+                    id="pfp"
+                    name="pfp"
+                    class="form-control"
+                    value="{{ old("pfp") }}"
+                >
+                @error('pfp')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" value="{{ old("email") }}">
+                @error('email')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
 
         <div class="row mb-5">
             <div class="col">

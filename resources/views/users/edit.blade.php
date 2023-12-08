@@ -1,10 +1,15 @@
 @extends("layouts.main")
 
+@push("scripts")
+    @vite([ "resources/js/confirmForm.js" ])
+@endpush
+
 @section("content")
     <form
         class="container my-5 grid"
         method="POST"
         action="{{ route("users.update", ["user" => $user]) }}"
+        enctype="multipart/form-data"
     >
         @csrf
         @method("PUT")
@@ -112,6 +117,86 @@
                 >
                 @error("phone_number")
                     <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="cv_link">Link CV <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="cv_link"
+                    name="cv_link"
+                    class="form-control"
+                    value="{{ $user->cv_link }}"
+                >
+                @error('cv_link')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="facebook_link">Link Facebook <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="facebook_link"
+                    name="facebook_link"
+                    class="form-control"
+                    value="{{ $user->facebook_link }}"
+                >
+                @error('facebook_link')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="instagram_link">Link Instagram <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="instagram_link"
+                    name="instagram_link"
+                    class="form-control"
+                    value="{{ $user->instagram_link }}"
+                >
+                @error('instagram_link')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="linkedin_link">Link LinkedIn <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="text"
+                    id="linkedin_link"
+                    name="linkedin_link"
+                    class="form-control"
+                    value="{{ $user->linkedin_link }}"
+                >
+                @error('linkedin_link')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col">
+                <label for="pfp">Imagine de profil: <span class="text-muted fw-light">(optional)</span>:</label>
+                <input
+                    type="file"
+                    id="pfp"
+                    name="pfp"
+                    class="form-control"
+                    value="{{ old("pfp") }}"
+                >
+                @error('pfp')
+                <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
         </div>
