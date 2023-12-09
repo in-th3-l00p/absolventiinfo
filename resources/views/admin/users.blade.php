@@ -14,6 +14,32 @@
         <div class="container shadow my-5 p-5 bg-white rounded-3 w-100">
             <div class="container d-flex justify-content-between align-items-center mb-5">
                 <h1>Conturi</h1>
+
+                <form>
+                    <div class="input-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Cauta dupa nume"
+                            aria-label="Cauta dupa nume"
+                            aria-describedby="search-btn"
+                            id="search-input"
+                            name="search"
+                        >
+                        <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            id="search-btn"
+                        >
+                            <img
+                                src="/assets/search.svg"
+                                alt="search"
+                                style="width: 20px"
+                            >
+                        </button>
+                    </div>
+                </form>
+
                 <form
                     method="POST"
                     action="{{ route("users.upload") }}"

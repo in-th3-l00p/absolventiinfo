@@ -22,8 +22,16 @@ class AdminController extends Controller
     }
 
     public function users() {
+        $users = User::query()->latest();
+        if (request()->has("search")) {
+            $users = $users
+                ->where("first_name", "like", "%" . request("search") . "%")
+                ->orWhere("last_name", "like", "%" . request("search") . "%")
+                ->orWhere("email", "like", "%" . request("search") . "%");
+        }
+
         return view("admin.users", [
-            "users" => User::query()->latest()->paginate(5)
+            "users" => $users->paginate(5)
         ]);
     }
 }
