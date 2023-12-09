@@ -28,7 +28,7 @@
                         >
                         <button
                             class="btn btn-outline-secondary"
-                            type="button"
+                            type="submit"
                             id="search-btn"
                         >
                             <img
