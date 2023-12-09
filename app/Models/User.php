@@ -29,11 +29,12 @@ class User extends Authenticatable
         'description',
         'email',
         'password',
+        'password_changed',
         'cv_link',
         'linkedin_link',
         'instagram_link',
         'facebook_link',
-        'pfp_path'
+        'pfp_path',
     ];
 
     /**

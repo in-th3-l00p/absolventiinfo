@@ -176,4 +176,30 @@ class UserController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function passwordChange() {
+        Gate::allowIf(fn (User $user) => !$user->password_changed);
+        return view("users.passwordChange");
+    }
+
+    public function passwordChangeSubmit(Request $request) {
+        Gate::allowIf(fn (User $user) => !$user->password_changed);
+        $data = $request->validate([
+            "password" => "required|min:8|max:255|confirmed"
+        ], [
+            "password.required" => "Parola este necesara",
+            "password.min" => "Parola trebuie sa aiba minim 8 caractere",
+            "password.max" => "Parola poate avea maxim 255 de caractere",
+            "password.confirmed" => "Parolele nu se potrivesc"
+        ]);
+
+        Auth::user()->update([
+            "password" => Hash::make($data["password"]),
+            "password_changed" => 1
+        ]);
+
+        return redirect()->route("users.show", [
+            "user" => Auth::user()
+        ]);
+    }
 }

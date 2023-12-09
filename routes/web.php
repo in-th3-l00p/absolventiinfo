@@ -29,6 +29,10 @@ Route::get(
     "/users/activities",
     [UserController::class, "activities"]
 )->name("users.activities");
+Route::get("/users/password", [UserController::class, "passwordChange"])
+    ->name("users.password");
+Route::put("/users/password", [UserController::class, "passwordChangeSubmit"])
+    ->name("users.password.submit");
 Route::resource("users", UserController::class)
     ->only(["show", "edit", "update"]);
 Route::get(
