@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ route("index") }}">Absolventi info</a>
+            <a class="navbar-brand" href="{{ route("index") }}">AbsolventInfo</a>
             <button
                 class="navbar-toggler"
                 type="button"

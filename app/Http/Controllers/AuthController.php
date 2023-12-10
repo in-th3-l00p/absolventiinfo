@@ -77,7 +77,10 @@ class AuthController extends Controller
                 "promotion_year" => "Anul de absolvire trebuie sa fie intre " . 1600 . " si " . now()->year
             ]);
 
-        $user = User::create($credentials);
+        $user = User::create([
+            ...$credentials,
+            "password_changed" => 1
+        ]);
         if ($request->hasFile('pfp')) {
             $validatedData = $request->validate([
                 'pfp' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
