@@ -48,7 +48,7 @@
             <div id="content" class="w-100 shadow bg-white rounded-3 p-5">
                 <div class="mb-3 pb-3 border-bottom">
                     <h1>{{ $activity->title }}</h1>
-                    <p class="text-secondary">Creat pe: {{ $activity->created_at }}</p>
+                    <p class="text-secondary">Creat pe data de: {{ \Carbon\Carbon::make($activity->created_at)->toDateString() }}</p>
                     <p class="text-secondary">Scris de: {{ $user->first_name . " " . $user->last_name }}</p>
                 </div>
 
