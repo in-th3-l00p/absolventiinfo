@@ -1,0 +1,10 @@
+.activity-text {
+    font-size: 0.75rem;
+    @media (width >= 768px)  {
+        font-size: 1rem;
+    }
+}
+
+.bubble {
+    background: #c8d5f6;
+}
