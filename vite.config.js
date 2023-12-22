@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/sass/post.scss',
                 'resources/sass/editor.scss',
                 'resources/sass/activityShow.scss',
+                'resources/sass/index.scss',
                 'resources/js/editor.js',
                 'resources/js/app.js',
                 'resources/js/activityForm.js',
