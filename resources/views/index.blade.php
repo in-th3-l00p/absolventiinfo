@@ -61,22 +61,24 @@
                     pe care le au elevii si profesorii acestuia.
                 </p>
             </div>
-            <div class="col ms-md-5 bubble rounded-5 p-4 position-relative">
-                <h2 class="fs-1 mb-5">Anunțuri</h2>
-                <p class="fs-5">Află ultimele noutați din cadrul liceului, în fiecare săptămână</p>
+            <div class="col">
+                <div class="ms-md-2 bubble rounded-5 p-4 position-relative">
+                    <h2 class="fs-1 mb-5">Anunțuri</h2>
+                    <p class="fs-5">Află ultimele noutați din cadrul liceului, în fiecare săptămână</p>
 
-                <a
-                    href="{{ route("announcements.index") }}"
-                    class="d-block position-absolute mt-3 me-3 me-md-4 mt-md-4"
-                    style="top: 0; right: 0; transform: translateX(-50%);"
-                >
-                    <button class="btn btn-light bg-white p-1" style="aspect-ratio: 1/1; border-radius: 50%;">
-                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.75 21.25L21.25 8.75" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8.75 8.75H21.25V21.25" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </a>
+                    <a
+                        href="{{ route("announcements.index") }}"
+                        class="d-block position-absolute mt-3 me-3 me-md-4 mt-md-4"
+                        style="top: 0; right: 0; transform: translateX(-50%);"
+                    >
+                        <button class="btn btn-light bg-white p-1" style="aspect-ratio: 1/1; border-radius: 50%;">
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.75 21.25L21.25 8.75" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8.75 8.75H21.25V21.25" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
