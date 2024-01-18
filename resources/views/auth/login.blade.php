@@ -11,6 +11,10 @@
                 <form method="POST" action="{{ route("login.submit") }}">
                     @csrf
 
+                    @if (session("status"))
+                        <div class="alert alert-success">{{ session("status") }}</div>
+                    @endif
+
                     @error("email")
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -39,19 +43,18 @@
                         <label class="form-label" for="password">Parola</label>
                     </div>
 
-{{--                    <div class="d-flex flex-column gap-3 justify-content-between align-items-start">--}}
-{{--                        <!-- Checkbox -->--}}
-{{--                        <div class="form-check mb-0">--}}
-{{--                            <input--}}
-{{--                                class="form-check-input me-2"--}}
-{{--                                type="checkbox"--}}
-{{--                                id="remember-me"--}}
-{{--                                name="remember-me"--}}
-{{--                            />--}}
-{{--                            <label class="form-check-label" for="remember-me">Tine-ma minte</label>--}}
-{{--                        </div>--}}
-{{--                        <a href="#" class="text-body">Ai uitat parola? (todo)</a>--}}
-{{--                    </div>--}}
+                    <div class="d-flex flex-column gap-3 justify-content-between align-items-start">
+                        <div class="form-check mb-0">
+                            <input
+                                class="form-check-input me-2"
+                                type="checkbox"
+                                id="remember-me"
+                                name="remember-me"
+                            />
+                            <label class="form-check-label" for="remember-me">Tine-ma minte</label>
+                        </div>
+                        <a href="{{ route("resetPassword") }}" class="text-body">Ai uitat parola?</a>
+                    </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button

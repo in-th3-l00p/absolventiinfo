@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\Guard;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 use function Laravel\Prompts\warning;
 
 class UserController extends Controller
@@ -200,6 +202,57 @@ class UserController extends Controller
 
         return redirect()->route("users.show", [
             "user" => Auth::user()
+        ]);
+    }
+
+    public function resetPasswordForm() {
+        return view("users.resetPasswordRequest");
+    }
+
+    public function resetPasswordSubmit(Request $request) {
+        $user = User::where("email", $request->email)->first();
+        if (!$user)
+            return back()->withErrors([
+                "email" => "Nu exista niciun utilizator cu acest email"
+            ]);
+        $status = Password::sendResetLink([
+            "email" => $user->email
+        ]);
+
+        return $status = Password::PASSWORD_RESET ?
+            back()->with("status", __($status)) :
+            back()->withErrors([
+                "email" => __($status)
+            ]);
+    }
+
+    public function resetPasswordChange(Request $request) {
+        $data = $request->validate([
+            "email" => "required|email",
+            "password" => "required|min:8|max:255|confirmed",
+            "token" => "required"
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+    }
+
+    public function resetPassword(Request $request) {
+        return view("users.resetPassword", [
+            "token" => $request->get("token"),
+            "email" => $request->get("email")
         ]);
     }
 }

@@ -11,8 +11,8 @@
                 <h2 class="row mb-5 fs-1 fw-semibold">Platformă dedicată tutoror absolvenților liceului de informatică Brașov</h2>
                 @guest
                     <div class="row flex-column flex-sm-row gap-5">
-                        <a class="d-block p-0 col" href="{{ route("login") }}"><button class="w-100 btn btn-dark">Înregistrează-te</button></a>
-                        <a class="d-block p-0 col" href="{{ route("register") }}"><button class="w-100 btn btn-outline-dark">Loghează-te</button></a>
+                        <a class="d-block p-0 col" href="{{ route("register") }}"><button class="w-100 btn btn-dark">Înregistrează-te</button></a>
+                        <a class="d-block p-0 col" href="{{ route("login") }}"><button class="w-100 btn btn-outline-dark">Loghează-te</button></a>
                     </div>
                 @endguest
                 @auth

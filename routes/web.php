@@ -14,6 +14,10 @@ Route::post("/login", [AuthController::class, "login"])->name("login.submit");
 Route::get("/logout", [AuthController::class, "logout"])->name("logout");
 Route::view("/register", "auth.register")->name("register");
 Route::post("/register", [AuthController::class, "register"])->name("register.submit");
+Route::get("/resetPassword", [UserController::class, "resetPasswordForm"])->name("resetPassword");
+Route::post("/resetPassword", [UserController::class, "resetPasswordSubmit"])->name("resetPassword.submit");
+Route::get("/resetPassword/change", [UserController::class, "resetPassword"])->name("password.reset");
+Route::put("/resetPassword/change", [UserController::class, "resetPasswordChange"])->name("resetPassword.update");
 
 Route::resource("announcements", AnnouncementController::class)
     ->only([ "index", "show" ]);
