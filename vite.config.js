@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/activityForm.js',
                 'resources/js/confirmForm.js',
                 'resources/js/admin/users.js',
+                'resources/js/admin/adminPostList.js'
             ],
             refresh: true,
         }),

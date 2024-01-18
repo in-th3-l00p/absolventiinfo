@@ -62,6 +62,19 @@ class AnnouncementController extends Controller
         ];
     }
 
+    public function uploadThumbnail(Request $request, Announcement $announcement) {
+        $this->authorize("upload", $announcement);
+        $path = Storage::disk("public")->put(
+            "/announcements/" . $announcement->id . "/thumbnail",
+            $request->file("upload")
+        );
+        $announcement->update([
+            "thumbnail" => "/storage/" . $path
+        ]);
+
+        return back();
+    }
+
     public function show(Announcement $announcement)
     {
         return view("announcements.show", [

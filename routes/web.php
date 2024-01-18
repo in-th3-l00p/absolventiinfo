@@ -62,6 +62,10 @@ Route::prefix("admin")->middleware("admin")->group(function () {
         "/announcements/{announcement}/upload",
         [AnnouncementController::class, "upload"]
     )->name("announcements.upload");
+    Route::put(
+        "/announcements/{announcement}/thumbnail/upload",
+        [AnnouncementController::class, "uploadThumbnail"]
+    )->name("announcements.upload.thumbnail");
 
     Route::resource("activities", ActivityController::class)
         ->except([ "index", "show" ]);
@@ -73,6 +77,10 @@ Route::prefix("admin")->middleware("admin")->group(function () {
         "/activities/{activity}/upload",
         [ActivityController::class, "upload"]
     )->name("activities.upload");
+    Route::put(
+        "/activities/{activity}/thumbnail/upload",
+        [ActivityController::class, "uploadThumbnail"]
+    )->name("activities.upload.thumbnail");
     Route::get(
         "/activities/{activity}/participants",
         [ActivityController::class, "participants"]

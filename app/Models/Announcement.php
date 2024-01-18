@@ -11,7 +11,7 @@ class Announcement extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        "title", "content", "user_id", "visibility"
+        "title", "content", "user_id", "visibility", "thumbnail"
     ];
 
     public function user() {

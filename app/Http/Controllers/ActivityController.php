@@ -66,6 +66,19 @@ class ActivityController extends Controller
         ];
     }
 
+    public function uploadThumbnail(Request $request, Activity $activity) {
+        $this->authorize("upload", $activity);
+        $path = Storage::disk("public")->put(
+            "/activities/" . $activity->id . "/thumbnail",
+            $request->file("upload")
+        );
+        $activity->update([
+            "thumbnail" => "/storage/" . $path
+        ]);
+
+        return back();
+    }
+
     public function join(Activity $activity) {
         $this->authorize("join", $activity);
         if ($activity

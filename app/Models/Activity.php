@@ -15,7 +15,7 @@ class Activity extends Model
         "title", "content", "visibility",
         "start", "end",
         "can_join", "max_joins", "join_expire",
-        "user_id"
+        "user_id", "thumbnail"
     ];
 
     public function user() {
