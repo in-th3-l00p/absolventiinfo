@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,12 @@ Route::get("/resetPassword", [UserController::class, "resetPasswordForm"])->name
 Route::post("/resetPassword", [UserController::class, "resetPasswordSubmit"])->name("resetPassword.submit");
 Route::get("/resetPassword/change", [UserController::class, "resetPassword"])->name("password.reset");
 Route::put("/resetPassword/change", [UserController::class, "resetPasswordChange"])->name("resetPassword.update");
+
+Route::get("/contact", [ContactController::class, "view"])->name("contact");
+Route::post("/contact", [ContactController::class, "submit"])->name("contact.submit");
+Route::view("/termsAndConditions", "pages.termsAndConditions")->name("termsAndConditions");
+Route::view("/cookies", "pages.cookies")->name("cookies");
+Route::view("/privacyPolicy", "pages.privacyPolicy")->name("privacyPolicy");
 
 Route::resource("announcements", AnnouncementController::class)
     ->only([ "index", "show" ]);

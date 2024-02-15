@@ -1,0 +1,9 @@
+<?php
+
+return [
+    "introduction" => "Bine ați venit pe AbsolventiInfo, o platformă dedicată comunității de absolvenți ai Colegiului Național de Informatică Grigore Moisil din Brașov. Utilizarea acestui site web este supusă următorilor termeni și condiții. Prin accesarea și utilizarea site-ului AbsolventiInfo, acceptați acești termeni și condiții în totalitate. Dacă nu sunteți de acord cu oricare parte din acești termeni și condiții, vă rugăm să nu utilizați site-ul nostru.",
+    "authorRights" => "Conținutul publicat pe AbsolventiInfo, inclusiv textele, designul, grafica și codul sursă, este protejat de legile drepturilor de autor și aparține site-ului AbsolventiInfo sau licențiatorilor săi. Reproducerea, modificarea, distribuția sau publicarea oricăror materiale fără permisiunea scrisă prealabilă este strict interzisă.",
+    "use" => "Site-ul AbsolventiInfo este destinat să ofere o platformă pentru absolvenții Colegiului Național de Informatică Grigore Moisil din Brașov pentru a partaja experiențe, oportunități și informații relevante. Utilizatorii sunt responsabili pentru orice conținut pe care îl postează pe site, inclusiv acuratețea și legalitatea acestuia. Nu este permis postarea de conținut ilegal, abuziv, defăimător, rasist sau orice alt conținut care încalcă drepturile altora.",
+    "privacy" => "AbsolventiInfo respectă confidențialitatea utilizatorilor săi. Informațiile personale colectate prin intermediul site-ului vor fi utilizate conform politicii noastre de confidențialitate. Vă încurajăm să citiți politica de confidențialitate pentru a înțelege cum sunt colectate, utilizate și protejate informațiile dumneavoastră personale.",
+    "contact" => "Pentru orice întrebări sau nelămuriri legate de termenii și condițiile de utilizare a site-ului AbsolventiInfo, vă rugăm să ne contactați la"
+];

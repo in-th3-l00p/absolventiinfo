@@ -11,3 +11,13 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+
+footer {
+    a {
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

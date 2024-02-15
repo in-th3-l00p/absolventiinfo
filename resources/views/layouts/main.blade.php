@@ -19,10 +19,25 @@
         @yield("content")
     </div>
 
-    <footer class="bg-dark text-white text-center">
-        <div class="text-center p-3">
-            © 2023 Copyright:
-            <a class="text-white" href="https://www.intheloop.bio">Tisca Catalin</a>
+    <footer class="bg-dark text-white text-center p-4">
+        <div class="grid">
+            <div class="row">
+                <div class="col d-flex flex-column text-end border-end">
+                    <a href="{{ route("index") }}">Acasă</a>
+                    <a href="{{ route("announcements.index") }}">Anunțuri</a>
+                    <a href="{{ route("activities.index") }}">Activități</a>
+                    <a href="{{ route("contact") }}">Contact</a>
+                </div>
+                <div class="col d-flex flex-column text-start">
+                    <a href="{{ route("termsAndConditions") }}">Termeni și condiții</a>
+                    <a href="{{ route("cookies") }}">Politică cookies</a>
+                    <a href="{{ route("privacyPolicy") }}">Politică de procesare a datelor</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            © 2023 Copyright: Tișcă Cătălin
         </div>
     </footer>
 
