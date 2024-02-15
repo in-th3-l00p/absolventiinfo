@@ -26,7 +26,7 @@
                     <a href="{{ route("index") }}" class="text-decoration-none text-white">Acasă</a>
                     <a href="{{ route("announcements.index") }}" class="text-decoration-none text-white">Anunțuri</a>
                     <a href="{{ route("activities.index") }}" class="text-decoration-none text-white">Activități</a>
-                    <a href="{{ route("contact") }}" class="text-decoration-none text-white">Contact</a>
+{{--                    <a href="{{ route("contact") }}" class="text-decoration-none text-white">Contact</a>--}}
                 </div>
                 <div class="col d-flex flex-column text-start">
                     <a href="{{ route("termsAndConditions") }}" class="text-decoration-none text-white">Termeni și condiții</a>
