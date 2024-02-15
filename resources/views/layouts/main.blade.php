@@ -23,15 +23,15 @@
         <div class="grid">
             <div class="row">
                 <div class="col d-flex flex-column text-end border-end">
-                    <a href="{{ route("index") }}">Acasă</a>
-                    <a href="{{ route("announcements.index") }}">Anunțuri</a>
-                    <a href="{{ route("activities.index") }}">Activități</a>
-                    <a href="{{ route("contact") }}">Contact</a>
+                    <a href="{{ route("index") }}" class="text-decoration-none text-white">Acasă</a>
+                    <a href="{{ route("announcements.index") }}" class="text-decoration-none text-white">Anunțuri</a>
+                    <a href="{{ route("activities.index") }}" class="text-decoration-none text-white">Activități</a>
+                    <a href="{{ route("contact") }}" class="text-decoration-none text-white">Contact</a>
                 </div>
                 <div class="col d-flex flex-column text-start">
-                    <a href="{{ route("termsAndConditions") }}">Termeni și condiții</a>
-                    <a href="{{ route("cookies") }}">Politică cookies</a>
-                    <a href="{{ route("privacyPolicy") }}">Politică de procesare a datelor</a>
+                    <a href="{{ route("termsAndConditions") }}" class="text-decoration-none text-white">Termeni și condiții</a>
+                    <a href="{{ route("cookies") }}" class="text-decoration-none text-white">Politică cookies</a>
+                    <a href="{{ route("privacyPolicy") }}" class="text-decoration-none text-white">Politică de procesare a datelor</a>
                 </div>
             </div>
         </div>
