@@ -16,14 +16,20 @@
         >
             <a
                 href="{{ route(Str::plural($name) . ".show", [$name => $post]) }}"
-                class="text-black text-decoration-none rounded py-3 px-5 bg-white d-flex flex-wrap align-items-center justify-content-between w-100"
+                class="text-black text-decoration-none rounded py-3 px-5 bg-white w-100 grid gap-4"
             >
-                <div style="max-width: 800px;">
-                    <h3>{{ $post->title }}</h3>
-                    <p class="description d-md-block d-none">{!! $post->getDescription() !!}</p>
-                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3>{{ $post->title }}</h3>
+                        <p class="description d-md-block d-none">{!! $post->getDescription() !!}</p>
+                    </div>
 
-                <button type="button" class="btn btn-dark align-self-center py-4">Citește</button>
+                    <div class="col d-flex justify-content-end align-items-center p-4">
+                        <button
+                            type="button" class="btn btn-dark"
+                        >Citește</button>
+                    </div>
+                </div>
             </a>
         </li>
     @empty
