@@ -1,0 +1,1 @@
+#content-container{display:flex;gap:3rem;flex-direction:column}@media (width >= 768px){#content-container{flex-direction:row}#content-container #content{order:0}#content-container #activity-date{order:1;white-space:nowrap;align-self:start}}
