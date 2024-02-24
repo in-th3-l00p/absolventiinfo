@@ -23,6 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("activities.index") }}">Activitati</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("contact") }}">Contact</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 @guest
