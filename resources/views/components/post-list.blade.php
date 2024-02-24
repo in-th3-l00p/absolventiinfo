@@ -19,7 +19,7 @@
                 class="text-black text-decoration-none rounded py-3 px-5 bg-white"
             >
                 <h3>{{ $post->title }}</h3>
-                <p class="description">{!! $post->getDescription() !!}</p>
+                <p class="description d-md-block d-none">{!! $post->getDescription() !!}</p>
             </a>
         </li>
     @empty
